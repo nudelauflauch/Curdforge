@@ -1,0 +1,29 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        "###",
+        "CAO",
+        "#S#"
+    ],
+    "key": {
+        "#": {
+            "item": "curd_mod:puff_paste_raw"
+        },
+        "C": {
+            "item": "curd_mod:raisin"
+        },
+        "A": {
+            "item": "minecraft:apple"
+        },
+        "O": {
+            "item": "curd_mod:vanille"
+        },
+        "S": {
+            "item": "minecraft:sugar"
+        }
+    },
+    "result": {
+        "item": "curd_mod:apple_strudel_raw",
+        "count": 1
+    }
+}

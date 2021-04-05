@@ -1,0 +1,20 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        "###",
+        "#C#",
+        "###"
+    ],
+    "key": {
+        "#": {
+            "item": "minecraft:wheat"
+        },
+        "C": {
+            "item": "curd_mod:jam_apricot"
+        }
+    },
+    "result": {
+        "item": "curd_mod:omlett_apricot",
+        "count": 1
+    }
+}

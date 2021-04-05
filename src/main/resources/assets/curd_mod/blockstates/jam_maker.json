@@ -1,0 +1,8 @@
+{
+    "variants": {
+        "facing=north": { "model": "curd_mod:block/jam_maker", "y": 180},
+        "facing=south": { "model": "curd_mod:block/jam_maker"},
+        "facing=west":  { "model": "curd_mod:block/jam_maker", "y": 90},
+        "facing=east":  { "model": "curd_mod:block/jam_maker", "y": 270}
+    }
+}

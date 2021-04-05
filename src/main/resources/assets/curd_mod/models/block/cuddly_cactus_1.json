@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cross",
+  "textures": {
+    "cross": "curd_mod:block/cuddly_cactus_1"
+  }
+}
