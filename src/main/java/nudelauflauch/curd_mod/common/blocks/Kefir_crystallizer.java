@@ -70,7 +70,12 @@ public class Kefir_crystallizer extends Block {
 		builder.add(FACING);
 	}
 
+	@OnlyIn(Dist.CLIENT)
+	public float getAmbientOcclusionLightValue(BlockState state, IBlockReader worldIn, BlockPos pos) {
+		return 1.0F;
+	}
+
 	public boolean propagatesSkylightDown(BlockState state, IBlockReader reader, BlockPos pos) {
 		return true;
 	}
-} 
+}
