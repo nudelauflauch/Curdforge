@@ -6,6 +6,7 @@ import net.minecraft.item.AxeItem;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Food;
 import net.minecraft.item.HoeItem;
+import net.minecraft.item.HoneyBottleItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.PickaxeItem;
 import net.minecraft.item.ShovelItem;
@@ -226,32 +227,26 @@ public class ItemInit {
 					.food(new Food.Builder().hunger(6).saturation(1.3f).build())));
 
 	// Kefir
-	public static final RegistryObject<Item> KEFIR = ITEMS.register("kefir",
-			() -> new Item(new Item.Properties().group(Curd_mod.CURD_MOD_MATERIALS_GROUP)));
 
 	public static final RegistryObject<Item> KEFIR_PLUM = ITEMS.register("kefir_plum",
-			() -> new Item(new Item.Properties().group(Curd_mod.CURD_MOD_MATERIALS_GROUP)
-					.food(new Food.Builder().hunger(2).saturation(0.6f).build())));
+			() -> new HoneyBottleItem((new Item.Properties()).maxStackSize(16).group(Curd_mod.CURD_MOD_MATERIALS_GROUP)
+					.food(new Food.Builder().build())));
 
-	public static final RegistryObject<Item> KEFIR_CHERRY = ITEMS.register("kefir_cherry",
-			() -> new Item(new Item.Properties().group(Curd_mod.CURD_MOD_MATERIALS_GROUP)
-					.food(new Food.Builder().hunger(2).saturation(0.6f).build())));
+	public static final RegistryObject<Item> KEFIR_CHERRY = ITEMS.register("kefir_cherry", () -> new HoneyBottleItem(
+			(new Item.Properties()).maxStackSize(16).group(Curd_mod.CURD_MOD_MATERIALS_GROUP)));
 
-	public static final RegistryObject<Item> KEFIR_LEMON = ITEMS.register("kefir_lemon",
-			() -> new Item(new Item.Properties().group(Curd_mod.CURD_MOD_MATERIALS_GROUP)
-					.food(new Food.Builder().hunger(2).saturation(0.6f).build())));
+	public static final RegistryObject<Item> KEFIR_LEMON = ITEMS.register("kefir_lemon", () -> new HoneyBottleItem(
+			(new Item.Properties()).maxStackSize(16).group(Curd_mod.CURD_MOD_MATERIALS_GROUP)));
 
-	public static final RegistryObject<Item> KEFIR_APRICOT = ITEMS.register("kefir_apricot",
-			() -> new Item(new Item.Properties().group(Curd_mod.CURD_MOD_MATERIALS_GROUP)
-					.food(new Food.Builder().hunger(2).saturation(0.6f).build())));
+	public static final RegistryObject<Item> KEFIR_APRICOT = ITEMS.register("kefir_apricot", () -> new HoneyBottleItem(
+			(new Item.Properties()).maxStackSize(16).group(Curd_mod.CURD_MOD_MATERIALS_GROUP)));
 
 	public static final RegistryObject<Item> KEFIR_SWEETBERRY = ITEMS.register("kefir_sweetberry",
-			() -> new Item(new Item.Properties().group(Curd_mod.CURD_MOD_MATERIALS_GROUP)
-					.food(new Food.Builder().hunger(2).saturation(0.6f).build())));
+			() -> new HoneyBottleItem(
+					(new Item.Properties()).maxStackSize(16).group(Curd_mod.CURD_MOD_MATERIALS_GROUP)));
 
-	public static final RegistryObject<Item> KEFIR_APPLE = ITEMS.register("kefir_apple",
-			() -> new Item(new Item.Properties().group(Curd_mod.CURD_MOD_MATERIALS_GROUP)
-					.food(new Food.Builder().hunger(2).saturation(0.6f).build())));
+	public static final RegistryObject<Item> KEFIR_APPLE = ITEMS.register("kefir_apple", () -> new HoneyBottleItem(
+			(new Item.Properties()).maxStackSize(16).group(Curd_mod.CURD_MOD_MATERIALS_GROUP)));
 
 	// food materials
 	public static final RegistryObject<Item> KEFIR_CRYSTAL = ITEMS.register("kefir_crystal",

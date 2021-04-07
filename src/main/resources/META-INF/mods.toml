@@ -26,3 +26,11 @@ It also adds new ores, armors, tools and weapons.
     versionRange="[1.16.4]"
     ordering="NONE"
     side="BOTH"
+
+
+[[dependencies.curd_mod]]
+    modId="patchouli"
+    mandatory=false
+    versionRange="[1.16.4]"
+    ordering="NONE"
+    side="BOTH"

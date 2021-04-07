@@ -43,6 +43,6 @@ public class BlockInit {
 	public static final RegistryObject<Kefir> KEFIR_JAR = BLOCKS.register("kefir_jar", () -> new Kefir());
 
 	public static final RegistryObject<CuddlyCactus> CUDDLY_CACTUS = BLOCKS.register("cuddly_cactus",
-			() -> new CuddlyCactus(AbstractBlock.Properties.create(Material.IRON).hardnessAndResistance(0.5f, 1f)
-					.sound(SoundType.SWEET_BERRY_BUSH).setRequiresTool()));
+			() -> new CuddlyCactus(
+					AbstractBlock.Properties.create(Material.IRON).sound(SoundType.SWEET_BERRY_BUSH).notSolid()));
 }

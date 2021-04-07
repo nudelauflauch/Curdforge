@@ -3,18 +3,18 @@ package nudelauflauch.curd_mod;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.RenderTypeLookup;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
+import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import nudelauflauch.curd_mod.core.init.BlockInit;
-import nudelauflauch.curd_mod.core.init.ContainerTypesInit;
 import nudelauflauch.curd_mod.core.init.ItemInit;
-import nudelauflauch.curd_mod.core.init.TileEntityTypesInit;
 import nudelauflauch.curd_mod.world.OreGeneration;
 //seed 628362910163464401
 
@@ -25,31 +25,32 @@ public class Curd_mod {
 	public static final Logger LOGGER = LogManager.getLogger();
 	public static final ItemGroup CURD_MOD_FOOD_GROUP = new Curd_modFoodGorup("curd_food_tab");
 	public static final ItemGroup CURD_MOD_MATERIALS_GROUP = new Curd_modMaterialsGorup("curd_materials_tab");
-    IEventBus forgeBus = MinecraftForge.EVENT_BUS;
+	IEventBus forgeBus = MinecraftForge.EVENT_BUS;
 
 	public Curd_mod() {
-		
+
 		IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
-		bus.addListener(this::setup);
 
 		ItemInit.ITEMS.register(bus);
 		BlockInit.BLOCKS.register(bus);
 		/*
-		PotionList.EFFECTS.register(bus);
-		PotionList.POTIONS.register(bus);
-		PotionList.addBrewingRecipies(); */
+		 * PotionList.EFFECTS.register(bus); PotionList.POTIONS.register(bus);
+		 * PotionList.addBrewingRecipies();
+		 */
 
 		MinecraftForge.EVENT_BUS.addListener(EventPriority.HIGH, OreGeneration::generatedOres);
 
 		MinecraftForge.EVENT_BUS.register(this);
 
-        // For events that happen after initialization. This is probably going to be use a lot.
-
+		// For events that happen after initialization. This is probably going to be use
+		// a lot.
 
 	}
-	
-	private void setup(final FMLCommonSetupEvent event) {
-	
+
+	private void clientstuff(final FMLClientSetupEvent event) {
+		RenderTypeLookup.setRenderLayer(BlockInit.KEFIR_JAR.get(), RenderType.getTranslucent());
+		RenderTypeLookup.setRenderLayer(BlockInit.CURD_POT.get(), RenderType.getTranslucent());
+		RenderTypeLookup.setRenderLayer(BlockInit.CUDDLY_CACTUS.get(), RenderType.getCutout());
 	}
 
 	// Creative Tabs
@@ -80,5 +81,4 @@ public class Curd_mod {
 		}
 
 	}
-
 }

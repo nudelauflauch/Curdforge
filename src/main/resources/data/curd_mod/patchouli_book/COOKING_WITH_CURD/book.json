@@ -1,0 +1,7 @@
+{
+	"name": "Cooking With Curd",
+	"landing_text": "LANDING TEXT",
+	"version": 1,
+	"model": "curd_mod:curd",
+	"creative_tab": "Curd_modMaterialsGorup"
+}
