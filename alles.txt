@@ -1,0 +1,7 @@
+./gradlew genEclipseRuns eclipse
+
+Craftingtabel
+https://crafting.thedestruc7i0n.ca/
+
+Dropp
+https://misode.github.io/loot-table/

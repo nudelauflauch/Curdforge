@@ -1,0 +1,98 @@
+{	
+	//vanilla items
+	"item.minecraft.sweet_berries":"Preiselbeeren",
+	"container.repair.expensive": "Zu Teuer! LOL",
+	
+	//blocks
+	"block.curd_mod.curd_maker":"Quark Kessel",
+	"block.curd_mod.curd_pot":"curd pot",
+	"block.curd_mod.lost_curd_golches_ore":"verlorenes Topfen Erz",
+	
+	//items
+		//food
+		
+			"item.curd_mod.ccp":"Topfengolatschen",
+			"item.curd_mod.ccp_raw":"rohe Topfengolatschen",
+			"item.curd_mod.ccp_sugard":"gezuckerte Topfengolatschen",
+			"item.curd_mod.ccp_wet":"nasser Topfengolatschen",
+			
+		//Strudel
+			"item.curd_mod.apple_strudel_piece_custard":"Apfelstrudel Stück mit Vanillesauce",
+			"item.curd_mod.apple_strudel_piece_sugard_custard":"Apfelstrudel Stück mit Vanillesauce und Zucker",
+			"item.curd_mod.apple_strudel_piece_sugard":"Apfelstrudel Stück mit Zucker",
+			"item.curd_mod.apple_strudel_piece":"Apfelstrudel Stück",
+			"item.curd_mod.apple_strudel":"Apfelstrudel",
+			"item.curd_mod.apple_strudel_raw":"roher Apfelstrudel",
+			"item.curd_mod.potted_strudel_piece_custard":"Topfenstrudel mit Vanillesauce",
+			"item.curd_mod.potted_strudel_piece_sugard_custard":"Topfenstrudel mit Vanillesauce und Zucker",
+			"item.curd_mod.potted_strudel_piece_sugard":"Topfenstrudel mit Zucker",
+			"item.curd_mod.potted_strudel_piece":"Topfenstrudel Stück",
+			"item.curd_mod.potted_strudel_raw":"roher Topfenstrudel",
+			"item.curd_mod.potted_strudel":"Topfenstrudel",
+			
+		//Omlett
+			"block.curd_mod.duff":"Omlette",
+			"block.curd_mod.duff_raisin":"Omlett mit rosinen",
+			"item.curd_mod.duff_raw_raisin":"Omlette Teig mit Rosinen",
+			"item.curd_mod.duff_raw":"Omlette Teig",
+			"item.curd_mod.omlett_choco":"Omlette mit Schocko",
+			"item.curd_mod.omlett_sweetberry":"Omlett mit Preiselbeeren",
+			"item.curd_mod.omlett_apricot":"Omlett mit Marillen",
+			"item.curd_mod.omlett_plum":"Omlett mit Plaumen",
+			"item.curd_mod.omlett_powidl":"Omlett mit Powidl",
+		//kaiserschmarrn
+			//raisin
+			"item.curd_mod.kaiserschmarrn_raisins":"Kaiserschmarrn mit Rosinen",
+			"item.curd_mod.kaiserschmarrn_raisins_apple_pure":"Kaiserschmarrn mit Rosinen und Apfelmus",
+			"item.curd_mod.kaiserschmarrn_raisins_powidl":"Kaiserschmarrn with raisins and powidl jam",
+			"item.curd_mod.kaiserschmarrn_raisins_sweetberry":"Kaiserschmarrn with raisins and sweetberry jam",
+			"item.curd_mod.kaiserschmarrn_raisins_apricot":"Kaiserschmarrn with raisins and apricot jam",
+			"item.curd_mod.kaiserschmarrn_raisins_plum":"Kaiserschmarrn with raisins and plum jam",
+			"item.curd_mod.kaiserschmarrn_raisins_cherry":"Kaiserschmarrn with raisins and cherry jam",
+			
+			//empty
+			"item.curd_mod.kaiserschmarrn":"Kaiserschmarrn",
+			"item.curd_mod.kaiserschmarrn_powidl":"Kaiserschmarrn with powidl jam",
+			"item.curd_mod.kaiserschmarrn_apricot":"Kaiserschmarrn with apricot jam",
+			"item.curd_mod.kaiserschmarrn_apple_pure":"Kaiserschmarrn with apple pure",
+			"item.curd_mod.kaiserschmarrn_sweetberry":"Kaiserschmarrn with sweetberry jam",
+			"item.curd_mod.kaiserschmarrn_cherry":"Kaiserschmarrn with cherry jam",
+			
+			
+		//jam
+			"item.curd_mod.jam_apricot":"Pfirsichmarmelade",
+			"item.curd_mod.sweetberry":"Preiselbeermarmelade",
+			"item.curd_mod.jam_apple_pure":"Appfelmus",
+			"item.curd_mod.jam_powidl":"Powidl Marmelade",
+			"item.curd_mod.apricot":"Marille",
+			"item.curd_mod.plum":"Pflaume",
+	
+	
+		//Materials
+		"item.curd_mod.curd": "Topfen",
+		"item.curd_mod.raisin":"Rosine",
+		"item.curd_mod.chocolate":"Chocolade",
+		"item.curd_mod.coco_bean_roasted":"geroestete Kakaubohnen",
+		"item.curd_mod.vanille":"Vanille",
+		"item.curd_mod.vanillin":"Vanillin",
+		"item.curd_mod.puff_paste":"Blaeterteig",
+		"item.curd_mod.puff_paste_raw":"roher Bläterteig",
+		"item.curd_mod.custard":"Vanillesauce",
+		
+		//ore
+		"item.curd_mod.lost_ccp_item":"verlohrener Topfengolacheningot",
+		"block.curd_mod.lost_ccp_ore":"verlohrener Topfengolachenerz",
+		"item.curd_mod.lost_ccp_sword":"verlohrener Topfengolachenschwert",
+		"item.curd_mod.lost_ccp_hammer":"verlohrener Topfengolachenhammer",
+		"item.curd_mod.lost_ccp_hoe":"verlohrener Topfengolachenhacke",
+		"item.curd_mod.lost_ccp_mace":"verlohrener Topfengolachenmorgenstern",
+		"item.curd_mod.lost_ccp_matrock":"verlohrener Topfengolachenmatrock",
+		"item.curd_mod.lost_ccp_pickaxe":"verlohrener Topfengolachenspitzhacke",
+		"item.curd_mod.lost_ccp_shovel":"verlohrener Topfengolachenschaufel",
+	
+	
+	
+	//other Things
+	"itemGroup.curd_food_tab":"curd mod Essenstab",
+	"itemGroup.curd_materials_tab":"curd mod Materialien tab"
+}
