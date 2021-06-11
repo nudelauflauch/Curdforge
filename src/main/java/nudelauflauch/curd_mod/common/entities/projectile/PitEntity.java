@@ -5,11 +5,12 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.projectile.ProjectileItemEntity;
 import net.minecraft.item.Item;
+import net.minecraft.network.IPacket;
 import net.minecraft.util.DamageSource;
-import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.util.math.EntityRayTraceResult;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.network.NetworkHooks;
 import nudelauflauch.curd_mod.core.init.EntityInit;
 import nudelauflauch.curd_mod.core.init.ItemInit;
 
@@ -37,17 +38,16 @@ public class PitEntity extends ProjectileItemEntity {
 	protected Item getDefaultItem() {
 		return ItemInit.PIT.get().asItem();
 	}
-
-	@Override
-	protected void onHitBlock(BlockRayTraceResult result) {
+	
+	public IPacket<?> createSpawnPacket() {
+		return NetworkHooks.getEntitySpawningPacket(this);
 	}
 
 	@Override
 	protected void onHit(RayTraceResult result) {
-		super.onHit(result);
-		if (!this.level.isClientSide) {
+		if(result.getType() == RayTraceResult.Type.ENTITY) {
 			Entity entity = ((EntityRayTraceResult)result).getEntity();
-			entity.getEntity().hurt(DamageSource.thrown(this, this.getOwner()), 0.0F);
+			entity.getEntity().hurt(DamageSource.thrown(this, this.getOwner()), 5.0F);
 		}
 	}
 

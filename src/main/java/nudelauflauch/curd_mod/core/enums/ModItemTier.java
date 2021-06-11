@@ -1,16 +1,16 @@
 package nudelauflauch.curd_mod.core.enums;
 
-import nudelauflauch.curd_mod.core.init.ItemInit;
+import java.util.function.Supplier;
+
 import net.minecraft.item.IItemTier;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.LazyValue;
-
-import java.util.function.Supplier;
+import nudelauflauch.curd_mod.core.init.ItemInit;
 
 public enum ModItemTier implements IItemTier {
 
 	LOST_CCP(2, 875, 3.0F, 2.0F, 2, () -> {
-		return Ingredient.fromItems(ItemInit.LOST_CCP_ITEM.get());
+		return Ingredient.of(ItemInit.LOST_CCP_ITEM.get());
 	});
 
 	private final int harvestLevel;
@@ -30,27 +30,27 @@ public enum ModItemTier implements IItemTier {
 		this.repairMaterial = new LazyValue<>(repairMaterialIn);
 	}
 
-	public int getMaxUses() {
+	public int getUses() {
 		return this.maxUses;
 	}
 
-	public float getEfficiency() {
+	public float getSpeed() {
 		return this.efficiency;
 	}
 
-	public float getAttackDamage() {
+	public float getAttackDamageBonus() {
 		return this.attackDamage;
 	}
 
-	public int getHarvestLevel() {
+	public int getLevel() {
 		return this.harvestLevel;
 	}
 
-	public int getEnchantability() {
+	public int getEnchantmentValue() {
 		return this.enchantability;
 	}
 
-	public Ingredient getRepairMaterial() {
-		return this.repairMaterial.getValue();
+	public Ingredient getRepairIngredient() {
+		return this.repairMaterial.get();
 	}
 }

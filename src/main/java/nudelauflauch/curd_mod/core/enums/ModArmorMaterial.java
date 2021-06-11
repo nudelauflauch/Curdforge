@@ -12,9 +12,9 @@ import nudelauflauch.curd_mod.Curd_mod;
 import nudelauflauch.curd_mod.core.init.ItemInit;
 
 public enum ModArmorMaterial implements IArmorMaterial {
-	LOST_CCP(Curd_mod.MOD_ID + ":lost_ccp", 20, new int[] { 2, 5, 7, 2 }, 50, SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND,
+	LOST_CCP(Curd_mod.MOD_ID + ":lost_ccp", 20, new int[] { 2, 5, 7, 2 }, 50, SoundEvents.ARMOR_EQUIP_IRON,
 			2.0F, () -> {
-				return Ingredient.fromItems(ItemInit.LOST_CCP_ITEM.get());
+				return Ingredient.of(ItemInit.LOST_CCP_ITEM.get());
 			});
 
 	private static final int[] MAX_DAMAGE_ARRAY = new int[] { 13, 15, 16, 11 };
@@ -37,24 +37,24 @@ public enum ModArmorMaterial implements IArmorMaterial {
 		this.repairMaterial = new LazyValue<>(repairMaterialSupplier);
 	}
 
-	public int getDurability(EquipmentSlotType slotIn) {
+	public int getDurabilityForSlot(EquipmentSlotType slotIn) {
 		return MAX_DAMAGE_ARRAY[slotIn.getIndex()] * this.maxDamageFactor;
 	}
 
-	public int getDamageReductionAmount(EquipmentSlotType slotIn) {
+	public int getDefenseForSlot(EquipmentSlotType slotIn) {
 		return this.damageReductionAmountArray[slotIn.getIndex()];
 	}
 
-	public int getEnchantability() {
+	public int getEnchantmentValue() {
 		return this.enchantability;
 	}
 
-	public SoundEvent getSoundEvent() {
+	public SoundEvent getEquipSound() {
 		return this.soundEvent;
 	}
 
-	public Ingredient getRepairMaterial() {
-		return this.repairMaterial.getValue();
+	public Ingredient getRepairIngredient() {
+		return this.repairMaterial.get();
 	}
 
 	public float getToughness() {

@@ -24,39 +24,41 @@ public class BlockInit {
 
 	// Blocks
 	public static final RegistryObject<Kefir_crystallizer> KEFIR_CRYSTALLIZER = BLOCKS.register("kefir_crystallizer",
-			() -> new Kefir_crystallizer(AbstractBlock.Properties.create(Material.WOOD).hardnessAndResistance(7.5f, 15f)
-					.sound(SoundType.WOOD).harvestLevel(2).harvestTool(ToolType.AXE).notSolid()));
+			() -> new Kefir_crystallizer(AbstractBlock.Properties.of(Material.WOOD).strength(0.8f, 1.5f)
+					.sound(SoundType.WOOD).harvestLevel(2).harvestTool(ToolType.AXE).air()));
 
-	public static final RegistryObject<CurdPot> CURD_POT = BLOCKS.register("curd_pot",
-			() -> new CurdPot(AbstractBlock.Properties.create(Material.IRON).hardnessAndResistance(7.5f, 15f)
-					.harvestTool(ToolType.PICKAXE).harvestLevel(2).sound(SoundType.STONE).setRequiresTool()));
+	public static final RegistryObject<CurdPot> CURD_POT = BLOCKS
+			.register("curd_pot",
+					() -> new CurdPot(AbstractBlock.Properties.of(Material.SPONGE).strength(1.0f, 2f)
+							.harvestTool(ToolType.PICKAXE).harvestLevel(2).sound(SoundType.STONE)
+							.requiresCorrectToolForDrops()));
 
 	public static final RegistryObject<Block> LOST_CCP_ORE = BLOCKS.register("lost_ccp_ore",
-			() -> new Block(AbstractBlock.Properties.from(Blocks.COAL_ORE).harvestLevel(2)));
+			() -> new Block(AbstractBlock.Properties.copy(Blocks.COAL_ORE).harvestLevel(2)));
 
 	public static final RegistryObject<Block> LOST_CCP_BLOCK = BLOCKS.register("lost_ccp_block",
-			() -> new Block(AbstractBlock.Properties.from(Blocks.COAL_ORE).harvestLevel(2).sound(SoundType.METAL)));
-	
+			() -> new Block(AbstractBlock.Properties.copy(Blocks.COAL_ORE).harvestLevel(2).sound(SoundType.METAL)));
+
 	public static final RegistryObject<Block> TILE = BLOCKS.register("tile",
-			() -> new Block(AbstractBlock.Properties.from(Blocks.COAL_ORE).harvestLevel(2).sound(SoundType.METAL)));
-	
+			() -> new Block(AbstractBlock.Properties.copy(Blocks.COAL_ORE).harvestLevel(2).sound(SoundType.METAL)));
+
 	public static final RegistryObject<Block> STOVE = BLOCKS.register("stove",
-			() -> new Jam_maker(AbstractBlock.Properties.create(Material.IRON).hardnessAndResistance(15f, 30f)
-					.sound(SoundType.METAL).harvestTool(ToolType.PICKAXE).harvestLevel(1).setRequiresTool()));
+			() -> new Jam_maker(AbstractBlock.Properties.of(Material.METAL).strength(15f, 30f)
+					.sound(SoundType.METAL).harvestTool(ToolType.PICKAXE).harvestLevel(1).requiresCorrectToolForDrops()));
 
 	public static final RegistryObject<Duff> DUFF = BLOCKS.register("duff",
-			() -> new Duff(AbstractBlock.Properties.create(Material.CAKE).harvestTool(ToolType.SHOVEL).harvestLevel(0)
-					.hardnessAndResistance(1f, 1f).sound(SoundType.FUNGUS).notSolid()));
+			() -> new Duff(AbstractBlock.Properties.of(Material.CAKE).harvestTool(ToolType.SHOVEL).harvestLevel(0)
+					.strength(1f, 1f).sound(SoundType.FUNGUS).air()));
 
 	public static final RegistryObject<Duff_raisin> DUFF_RAISINS = BLOCKS.register("duff_raisins",
-			() -> new Duff_raisin((AbstractBlock.Properties.create(Material.CAKE).hardnessAndResistance(1f, 1f)
-					.sound(SoundType.FUNGUS).notSolid())));
+			() -> new Duff_raisin((AbstractBlock.Properties.of(Material.CAKE).strength(1f, 1f)
+					.sound(SoundType.FUNGUS).air())));
 
 	public static final RegistryObject<Kefir> KEFIR_JAR = BLOCKS.register("kefir_jar", () -> new Kefir(
-			AbstractBlock.Properties.create(Material.GLASS).hardnessAndResistance(1f, 2f).sound(SoundType.GLASS)));
+			AbstractBlock.Properties.of(Material.GLASS).strength(1f, 2f).sound(SoundType.GLASS)));
 
 	public static final RegistryObject<CuddlyCactus> OPUNTIEN_CACTUS = BLOCKS.register("opuntien_cactus",
-			() -> new CuddlyCactus(AbstractBlock.Properties.create(Material.CACTUS).sound(SoundType.SWEET_BERRY_BUSH)
-					.notSolid().doesNotBlockMovement()));
+			() -> new CuddlyCactus(AbstractBlock.Properties.of(Material.CACTUS).sound(SoundType.SWEET_BERRY_BUSH)
+					.air().instabreak()));
 
 }

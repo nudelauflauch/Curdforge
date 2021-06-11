@@ -20,9 +20,10 @@ import nudelauflauch.curd_mod.core.init.BlockInit;
 public class OreGeneration {
 
 	private static final BlockClusterFeatureConfig CONFIG = (new BlockClusterFeatureConfig.Builder(
-			(new WeightedBlockStateProvider()).addWeightedBlockstate(
-					BlockInit.OPUNTIEN_CACTUS.get().getDefaultState().with(CuddlyCactus.AGE, Integer.valueOf(6)), 2),
-			SimpleBlockPlacer.PLACER)).tries(64).build();
+			(new WeightedBlockStateProvider()).add(
+					BlockInit.OPUNTIEN_CACTUS.get().defaultBlockState().setValue(CuddlyCactus.AGE, Integer.valueOf(6)),
+					2),
+			SimpleBlockPlacer.INSTANCE)).tries(64).build();
 
 	public static void Oregeneration(BiomeLoadingEvent event) {
 
@@ -31,8 +32,8 @@ public class OreGeneration {
 
 			if (event.getCategory().equals(Biome.Category.DESERT)) {
 				event.getGeneration().getFeatures(GenerationStage.Decoration.VEGETAL_DECORATION)
-						.add(() -> Feature.FLOWER.withConfiguration(CONFIG)
-								.withPlacement(Features.Placements.PATCH_PLACEMENT).func_242731_b(1));
+						.add(() -> Feature.FLOWER.configured(CONFIG)
+								.decorated(Features.Placements.HEIGHTMAP_DOUBLE_SQUARE).count(1));
 			}
 		}
 	}
@@ -41,10 +42,10 @@ public class OreGeneration {
 			int minHeight, int veinSize, int veinsPerChunk) {
 
 		ConfiguredFeature<?, ?> feature = Feature.ORE
-				.withConfiguration(new OreFeatureConfig(OreFeatureConfig.FillerBlockType.BASE_STONE_OVERWORLD,
-						oreBlock.getDefaultState(), veinSize))
-				.withPlacement(Placement.RANGE.configure(new TopSolidRangeConfig(minHeight, 0, maxHeight)))
-				.func_242731_b(veinsPerChunk);
+				.configured(new OreFeatureConfig(OreFeatureConfig.FillerBlockType.NATURAL_STONE,
+						oreBlock.defaultBlockState(), veinSize))
+				.decorated(Placement.RANGE.configured(new TopSolidRangeConfig(minHeight, 0, maxHeight)))
+				.count(veinsPerChunk);
 
 		biomeGenSettings.getFeatures(GenerationStage.Decoration.UNDERGROUND_ORES).add(() -> feature);
 	}
