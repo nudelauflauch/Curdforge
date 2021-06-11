@@ -14,7 +14,7 @@ authors="Stehschnitzel" #optional
 
 description='''
 
-Curd mod makes curd and many different foods that you can craft from it.
+Curd mod makes curd and many different food types that you can craft from Curd(or not).
 It also adds new ores, armors, tools and weapons.
 
 '''
@@ -24,13 +24,8 @@ It also adds new ores, armors, tools and weapons.
     modId="minecraft"
     mandatory=true
     versionRange="[1.16.4]"
-    ordering="NONE"
-    side="BOTH"
-
 
 [[dependencies.curd_mod]]
     modId="patchouli"
     mandatory=false
-    versionRange="[1.16.4]"
-    ordering="NONE"
-    side="BOTH"
+    versionRange="[1.16.4-48,)"

@@ -1,41 +1,23 @@
 package nudelauflauch.curd_mod.common.blocks;
 
-import java.awt.Container;
 import java.util.stream.Stream;
 
-import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.SoundType;
-import net.minecraft.block.material.Material;
-import net.minecraft.block.material.MaterialColor;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.entity.player.ServerPlayerEntity;
-import net.minecraft.inventory.container.INamedContainerProvider;
 import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.state.DirectionProperty;
 import net.minecraft.state.StateContainer.Builder;
 import net.minecraft.state.properties.BlockStateProperties;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Direction;
-import net.minecraft.util.Hand;
 import net.minecraft.util.Mirror;
 import net.minecraft.util.Rotation;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.util.math.shapes.IBooleanFunction;
 import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.util.math.shapes.VoxelShapes;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorld;
-import net.minecraft.world.World;
-import net.minecraftforge.fml.network.NetworkHooks;
-import nudelauflauch.curd_mod.core.init.TileEntityTypesInit;
 
 public class Jam_maker extends Block {
 
@@ -117,9 +99,8 @@ public class Jam_maker extends Block {
 				return VoxelShapes.combineAndSimplify(v1, v2, IBooleanFunction.OR);
 			}).get();
 
-	public Jam_maker() {
-		super(AbstractBlock.Properties.create(Material.IRON, MaterialColor.GRAY).hardnessAndResistance(1.5f)
-				.sound(SoundType.METAL));
+	public Jam_maker(Properties config) {
+		super(config);
 
 		this.setDefaultState(this.stateContainer.getBaseState().with(FACING, Direction.NORTH));
 	}
@@ -165,36 +146,27 @@ public class Jam_maker extends Block {
 	public boolean hasTileEntity(BlockState state) {
 		return true;
 	}
-/*
-	@Override
-	public TileEntity createTileEntity(BlockState state, IBlockReader world) {
-		return new TileEntityTypesInit();
-	}
-
-	@SuppressWarnings("deprecation")
-	@Override
-	public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player,
-			Hand handIn, BlockRayTraceResult hit) {
-		if (!worldIn.isRemote()) {
-			TileEntity te = worldIn.getTileEntity(pos);
-			if (te instanceof JamMakerTileEntity) {
-				INamedContainerProvider containerProvider = new INamedContainerProvider() {
-					@Override
-					public ITextComponent getDisplayName() {
-						return new TranslationTextComponent("screen.curd_mod.JamMaker");
-					}
-
-					@Override
-					public Container createMenue(int i, PlayerInventory playerInv, PlayerEntity plyerEntity) {
-						return new JamMakerConatainer(i, world, pos, playerInv, playerEntity);
-					}
-				};
-				NetworkHooks.openGui((ServerPlayerEntity) player, (JamMakerTileEntity) te, pos);
-			} else {
-				throw new IllegalStateException("Jam Maker container provider is missing!");
-			}
-		}
-		return ActionResultType.SUCCESS;
-	}*/
+	/*
+	 * @Override public TileEntity createTileEntity(BlockState state, IBlockReader
+	 * world) { return new TileEntityTypesInit(); }
+	 * 
+	 * @SuppressWarnings("deprecation")
+	 * 
+	 * @Override public ActionResultType onBlockActivated(BlockState state, World
+	 * worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult
+	 * hit) { if (!worldIn.isRemote()) { TileEntity te = worldIn.getTileEntity(pos);
+	 * if (te instanceof JamMakerTileEntity) { INamedContainerProvider
+	 * containerProvider = new INamedContainerProvider() {
+	 * 
+	 * @Override public ITextComponent getDisplayName() { return new
+	 * TranslationTextComponent("screen.curd_mod.JamMaker"); }
+	 * 
+	 * @Override public Container createMenue(int i, PlayerInventory playerInv,
+	 * PlayerEntity plyerEntity) { return new JamMakerConatainer(i, world, pos,
+	 * playerInv, playerEntity); } }; NetworkHooks.openGui((ServerPlayerEntity)
+	 * player, (JamMakerTileEntity) te, pos); } else { throw new
+	 * IllegalStateException("Jam Maker container provider is missing!"); } } return
+	 * ActionResultType.SUCCESS; }
+	 */
 
 }

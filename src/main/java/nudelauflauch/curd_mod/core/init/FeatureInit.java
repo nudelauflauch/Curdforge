@@ -9,11 +9,15 @@ import net.minecraft.world.gen.blockstateprovider.SimpleBlockStateProvider;
 import net.minecraft.world.gen.feature.BlockClusterFeatureConfig;
 import nudelauflauch.curd_mod.common.blocks.CuddlyCactus;
 
-public class FeatureInit {
-	public static final BlockState CUDDLY_CACTUS = BlockInit.CUDDLY_CACTUS.get().getDefaultState()
-			.with(CuddlyCactus.AGE, 3);
+public class FeatureInit{
+	/* This just gets the BlockState for the frostberry bush, and returns the highest age, so we can call it easily */
+	public static final BlockState BUSH = BlockInit.OPUNTIEN_CACTUS.get().getDefaultState()
+			.with(CuddlyCactus.AGE, 6);
 
+	/* This is a vanilla like BlockCluserFeatureConfig, used just like vanilla to call */
 	public static final BlockClusterFeatureConfig BUSH_CONFIG = (new BlockClusterFeatureConfig.Builder(
-			new SimpleBlockStateProvider(CUDDLY_CACTUS), new SimpleBlockPlacer()).tries(64)
-					.whitelist(ImmutableSet.of(Blocks.SAND.getBlock())).func_227317_b_().build());
+			new SimpleBlockStateProvider(BUSH), new SimpleBlockPlacer()).tries(64)
+					//whitelist
+					.whitelist(ImmutableSet.of(Blocks.GRASS_BLOCK.getBlock()))).func_227317_b_().build();
+
 }

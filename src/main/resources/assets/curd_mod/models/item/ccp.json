@@ -1,6 +1,6 @@
 {
 	"parent":"item/generated",
 	"textures": {
-		"layer0": "curd_mod:item/ccp"
+		"layer0": "curd_mod:item/ccp/ccp"
 	}
 }

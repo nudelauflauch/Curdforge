@@ -1,23 +1,21 @@
 package nudelauflauch.curd_mod.common.blocks;
 
-import net.minecraft.block.AbstractBlock;
+import java.util.stream.Stream;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.ServerPlayerEntity;
+import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
+import net.minecraft.state.DirectionProperty;
 import net.minecraft.state.IntegerProperty;
 import net.minecraft.state.StateContainer;
 import net.minecraft.state.properties.BlockStateProperties;
-import net.minecraft.stats.Stats;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Hand;
-import net.minecraft.util.IItemProvider;
-import net.minecraft.util.SoundCategory;
-import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.util.math.MathHelper;
@@ -27,33 +25,38 @@ import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.util.math.shapes.VoxelShapes;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
+import nudelauflauch.curd_mod.Funktions;
+import nudelauflauch.curd_mod.common.te.CurdModBlockStateProperties;
 import nudelauflauch.curd_mod.core.init.ItemInit;
 
 public class CurdPot extends Block {
+	public static final IntegerProperty LEVEL = CurdModBlockStateProperties.LEVEL_0_3;
 
-	public static final IntegerProperty LEVEL = BlockStateProperties.LEVEL_0_3;
-	public static final VoxelShape INSIDE = makeCuboidShape(1.0D, 1.0D, 1.0D, 15.0D, 16.0D, 15.0D);
-	protected static final VoxelShape SHAPE = VoxelShapes
-			.combineAndSimplify(VoxelShapes.fullCube(),
-					VoxelShapes.or(makeCuboidShape(0.0D, 0.0D, 0.0D, 0.0D, 0.0D, 0.0D),
-							makeCuboidShape(16.0D, 16.0D, 16.0D, 16.0D, 16.0D, 16.0D), INSIDE),
-					IBooleanFunction.ONLY_FIRST);
+	public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
 
-	public CurdPot(AbstractBlock.Properties properties) {
+	private static final VoxelShape SHAPE_N = Stream.of(Block.makeCuboidShape(14, 4, 2, 16, 16, 14),
+			Block.makeCuboidShape(0, 0, 14, 2, 2, 16), Block.makeCuboidShape(14, 0, 14, 16, 2, 16),
+			Block.makeCuboidShape(14, 0, 0, 16, 2, 2), Block.makeCuboidShape(0, 0, 0, 2, 2, 2),
+			Block.makeCuboidShape(0, 2, 0, 16, 4, 16), Block.makeCuboidShape(0, 4, 0, 16, 16, 2),
+			Block.makeCuboidShape(0, 4, 14, 16, 16, 16), Block.makeCuboidShape(0, 4, 2, 2, 16, 14)).reduce((v1, v2) -> {
+				return VoxelShapes.combineAndSimplify(v1, v2, IBooleanFunction.OR);
+			}).get();
+
+	public CurdPot(Properties properties) {
 		super(properties);
-		this.setDefaultState(this.stateContainer.getBaseState().with(LEVEL, Integer.valueOf(0)));
 	}
 
 	public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
-		return SHAPE;
+		return SHAPE_N;
 	}
 
-	public VoxelShape getRaytraceShape(BlockState state, IBlockReader worldIn, BlockPos pos) {
-		return INSIDE;
+	@Override
+	public BlockState getStateForPlacement(BlockItemUseContext context) {
+		return this.getDefaultState().with(FACING, context.getPlacementHorizontalFacing().getOpposite());
 	}
 
 	public void setMilkLevel(World worldIn, BlockPos pos, BlockState state, int level) {
-		worldIn.setBlockState(pos, state.with(LEVEL, Integer.valueOf(MathHelper.clamp(level, 0, 3))), 2);
+		worldIn.setBlockState(pos, state.with(LEVEL, Integer.valueOf(MathHelper.clamp(level, 0, 13))), 2);
 		worldIn.updateComparatorOutputLevel(pos, this);
 	}
 
@@ -67,72 +70,32 @@ public class CurdPot extends Block {
 
 	}
 
+	@Override
 	public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player,
 			Hand handIn, BlockRayTraceResult hit) {
-		ItemStack itemstack = player.getHeldItem(handIn);
 		int i = state.get(LEVEL);
+		ItemStack itemstack = player.getHeldItem(handIn);
 		Item item = itemstack.getItem();
-		if (itemstack.isEmpty()) {
-			return ActionResultType.PASS;
-		} else {
-			if (item == Items.MILK_BUCKET) {
-				if (i < 2 && !worldIn.isRemote) {
-					if (!player.abilities.isCreativeMode) {
-						ItemStack itemstack3 = new ItemStack(Items.BUCKET);
-						player.addStat(Stats.USE_CAULDRON);
-						player.setHeldItem(handIn, itemstack3);
-						if (player instanceof ServerPlayerEntity) {
-							((ServerPlayerEntity) player).sendContainerToPlayer(player.container);
-						}
-					}
-
-					worldIn.playSound((PlayerEntity) null, pos, SoundEvents.ITEM_BUCKET_EMPTY, SoundCategory.BLOCKS,
-							1.0F, 1.0F);
-					this.setMilkLevel(worldIn, pos, state, i + 1);
-				}
-
-				return ActionResultType.func_233537_a_(worldIn.isRemote);
-			} else if (item == Items.GLASS_BOTTLE) {
-				if (i == 3 && !worldIn.isRemote) {
-					if (!player.abilities.isCreativeMode) {
-						itemstack.shrink(1);
-						if (itemstack.isEmpty()) {
-							player.setHeldItem(handIn, new ItemStack((IItemProvider) ItemInit.WHEY.get()));
-						} else if (!player.inventory
-								.addItemStackToInventory(new ItemStack((IItemProvider) ItemInit.WHEY.get()))) {
-							player.dropItem(new ItemStack((IItemProvider) ItemInit.WHEY.get()), false);
-						}
-					}
-					player.addStat(Stats.USE_CAULDRON);
-					this.setMilkLevel(worldIn, pos, state, 0);
-					worldIn.playSound((PlayerEntity) null, pos, SoundEvents.ITEM_BOTTLE_FILL, SoundCategory.BLOCKS,
-							1.0F, 1.0F);
-				}
-
-				return ActionResultType.func_233537_a_(worldIn.isRemote);
-			} else if (item == ItemInit.SIEVE.get()) {
+		if (!worldIn.isRemote) {
+			if (i < 3 && item == Items.MILK_BUCKET) {
+				itemstack.shrink(1);
+				Funktions.dropp(state, worldIn, pos, player, handIn, hit, Items.BUCKET);
+				this.setMilkLevel(worldIn, pos, state, i + 1);
+			} else if (i == 2 && item == ItemInit.SIEVE.get()) {
+				itemstack.shrink(1);
+				Funktions.dropp(state, worldIn, pos, player, handIn, hit, ItemInit.CURD.get());
 				this.setMilkLevel(worldIn, pos, state, i += 1);
-				System.out.println("next blockstate");
-				if (i == 2 && !worldIn.isRemote) {
-					if (!player.abilities.isCreativeMode) {
-						if (itemstack.isEmpty()) {
-							player.setHeldItem(handIn, new ItemStack(ItemInit.CURD.get()));
-						} else if (!player.inventory.addItemStackToInventory(new ItemStack(ItemInit.CURD.get()))) {
-							player.dropItem(new ItemStack(ItemInit.CURD.get()), false);
-						}
-					}
-					player.addStat(Stats.USE_CAULDRON);
-					worldIn.playSound((PlayerEntity) null, pos, SoundEvents.ITEM_BUCKET_FILL_FISH, SoundCategory.BLOCKS,
-							1.0F, 1.0F);
-				}
-				return ActionResultType.func_233537_a_(worldIn.isRemote);
-			} else {
-				return ActionResultType.PASS;
+			} else if (i == 3 && item == Items.GLASS_BOTTLE) {
+				itemstack.shrink(1);
+				Funktions.dropp(state, worldIn, pos, player, handIn, hit, ItemInit.WHEY.get());
+				this.setMilkLevel(worldIn, pos, state, 0);
 			}
 		}
+		return ActionResultType.SUCCESS;
 	}
 
 	protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
 		builder.add(LEVEL);
+		builder.add(FACING);
 	}
 }

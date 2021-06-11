@@ -2,8 +2,8 @@
 	"credit": "Made with Blockbench",
 	"texture_size": [64, 64],
 	"textures": {
-		"1": "curd_mod:blocks/kefir/kefir_jar_12",
-		"particle": "curd_mod:blocks/kefir/kefir_jar_12"
+		"1": "curd_mod:block/kefir/kefir_jar_12",
+		"particle": "curd_mod:block/kefir/kefir_jar_12"
 	},
 	"elements": [
 		{

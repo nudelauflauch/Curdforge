@@ -7,13 +7,13 @@
     ],
     "key": {
         "#": {
-            "item": "minecraft:carrot"
+            "item": "minecraft:string"
         },
         "O": {
             "tag": "minecraft:planks"
         },
         "i": {
-            "item": "minecraft:iron_ingot"
+            "item": "minecraft:leather"
         }
     },
     "result": {

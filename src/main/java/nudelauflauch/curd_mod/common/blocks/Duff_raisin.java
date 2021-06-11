@@ -2,11 +2,8 @@ package nudelauflauch.curd_mod.common.blocks;
 
 import java.util.stream.Stream;
 
-import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.SoundType;
-import net.minecraft.block.material.Material;
 import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.state.DirectionProperty;
 import net.minecraft.state.StateContainer.Builder;
@@ -37,9 +34,8 @@ public class Duff_raisin extends Block {
 				return VoxelShapes.combineAndSimplify(v1, v2, IBooleanFunction.OR);
 			}).get();
 
-	public Duff_raisin() {
-		super((AbstractBlock.Properties.create(Material.CAKE).hardnessAndResistance(1f, 1f).sound(SoundType.FUNGUS)
-				.notSolid()));
+	public Duff_raisin(Properties baum) {
+		super(baum);
 
 		this.setDefaultState(this.stateContainer.getBaseState().with(FACING, Direction.NORTH));
 	}
