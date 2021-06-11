@@ -5,24 +5,23 @@ import java.util.function.Supplier;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import net.minecraft.block.ComposterBlock;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.ItemRenderer;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.RenderTypeLookup;
+import net.minecraft.client.renderer.entity.SpriteRenderer;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
-import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import nudelauflauch.curd_mod.core.init.BlockInit;
 import nudelauflauch.curd_mod.core.init.EntityInit;
 import nudelauflauch.curd_mod.core.init.ItemInit;
-import nudelauflauch.curd_mod.core.util.Composter;
 import nudelauflauch.curd_mod.world.OreGeneration;
 
 @Mod(Curd_mod.MOD_ID)
@@ -52,24 +51,25 @@ public class Curd_mod {
 	}
 
 	private void setup(final FMLClientSetupEvent event) {
-		RenderTypeLookup.setRenderLayer(BlockInit.KEFIR_JAR.get(), RenderType.getTranslucent());
-		RenderTypeLookup.setRenderLayer(BlockInit.CURD_POT.get(), RenderType.getTranslucent());
-		RenderTypeLookup.setRenderLayer(BlockInit.OPUNTIEN_CACTUS.get(), RenderType.getCutout());
+		RenderTypeLookup.setRenderLayer(BlockInit.KEFIR_JAR.get(), RenderType.translucent());
+		RenderTypeLookup.setRenderLayer(BlockInit.CURD_POT.get(), RenderType.translucent());
+		RenderTypeLookup.setRenderLayer(BlockInit.OPUNTIEN_CACTUS.get(), RenderType.cutout());
 
 		registerEntityModels(event.getMinecraftSupplier());
+		
+		
 	}
-
-	private void commonsetup(final FMLCommonSetupEvent event) {
-		Composter.registerCompat();
-	}
-
+	
+	
+	//Itemrenderer
 	private void registerEntityModels(Supplier<Minecraft> minecraft) {
 		ItemRenderer renderer = minecraft.get().getItemRenderer();
 
-		// RenderingRegistry.registerEntityRenderingHandler(EntityInit.PIT_PROJECTILE.get(),
-		// (renderManager) -> new SpriteRenderer<>(renderManager, renderer));
+		RenderingRegistry.registerEntityRenderingHandler(EntityInit.PIT.get(),
+				(renderManager) -> new SpriteRenderer<>(renderManager, renderer));
 	}
 
+	
 	// Creative Tabs
 	public static class Curd_modFoodGorup extends ItemGroup {
 
@@ -79,7 +79,8 @@ public class Curd_mod {
 		}
 
 		@Override
-		public ItemStack createIcon() {
+		public ItemStack makeIcon() {
+			// TODO Auto-generated method stub
 			return ItemInit.CCP.get().getDefaultInstance();
 		}
 
@@ -93,7 +94,7 @@ public class Curd_mod {
 		}
 
 		@Override
-		public ItemStack createIcon() {
+		public ItemStack makeIcon() {
 			return ItemInit.CURD.get().getDefaultInstance();
 		}
 
