@@ -39,29 +39,29 @@ public class CuddlyCactus extends DeadBushBlock implements IGrowable {
 	}
 
 	public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
-		if (state.get(AGE) == 0) {
+		if (state.getValue(AGE) == 0) {
 			return BUSHLING_SHAPE;
 		} else {
-			return state.get(AGE) < 3 ? GROWING_SHAPE : super.getShape(state, worldIn, pos, context);
+			return state.getValue(AGE) < 3 ? GROWING_SHAPE : super.getShape(state, worldIn, pos, context);
 		}
 	}
 
 	@Override
-	public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player,
+	public ActionResultType use(BlockState state, World worldIn, BlockPos pos, PlayerEntity player,
 			Hand handIn, BlockRayTraceResult hit) {
-		int i = state.get(AGE);
+		int i = state.getValue(AGE);
 		boolean flag = i == 3;
 		System.out.println(i);
-		if (!flag && player.getHeldItem(handIn).getItem() == Items.BONE_MEAL) {
+		if (!flag && player.getItemInHand(handIn).getItem() == Items.BONE_MEAL) {
 			return ActionResultType.PASS;
 		} else if (i > 4 && i == 8) {
-			int j = 1 + worldIn.rand.nextInt(2);
+			int j = 1 + worldIn.random.nextInt(2);
 			spawnAsEntity(worldIn, pos, new ItemStack(ItemInit.OPUNTIEN_BLOSSOM.get(), j + (flag ? i : i - 4) - 2));
 			spawnAsEntity(worldIn, pos, new ItemStack(ItemInit.TIBICOS.get(), j + (flag ? i : 1 - 0) - 1));
-			worldIn.setBlockState(pos, state.with(AGE, Integer.valueOf(4)), 2);
+			worldIn.setBlock(pos, state.setValue(AGE, Integer.valueOf(4)), 2);
 			return ActionResultType.SUCCESS;
 		} else if (i > 4) {
-			int j = 1 + worldIn.rand.nextInt(2);
+			int j = 1 + worldIn.random.nextInt(2);
 			spawnAsEntity(worldIn, pos, new ItemStack(ItemInit.OPUNTIEN_BLOSSOM.get(), j + (flag ? i : i - 4) - 1));
 			worldIn.setBlockState(pos, state.with(AGE, Integer.valueOf(4)), 2);
 			return ActionResultType.SUCCESS;
