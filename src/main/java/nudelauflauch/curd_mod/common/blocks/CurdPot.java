@@ -50,15 +50,17 @@ public class CurdPot extends Block {
 		int i = state.getValue(LEVEL);
 		ItemStack itemstack = player.getItemInHand(handIn);
 		Item item = itemstack.getItem();
-		if (!worldIn.isClientSide) {
+		if (itemstack.isEmpty()) {
+			return ActionResultType.PASS;
+		} else if (!worldIn.isClientSide) {
 			if (i < 3 && item == Items.MILK_BUCKET) {
-				worldIn.playSound(player, pos, SoundEvents.BUCKET_EMPTY, SoundCategory.BLOCKS, 1.0F, 1.0F);
+				worldIn.playSound((PlayerEntity) null, pos, SoundEvents.BUCKET_EMPTY, SoundCategory.BLOCKS, 1.0F, 1.0F);
 				Funktions.dropp(state, worldIn, pos, player, handIn, hit, Items.BUCKET, true, LEVEL, i += 1);
 			} else if (i == 2 && item == ItemInit.SIEVE.get()) {
-				worldIn.playSound(player, pos, SoundEvents.BOTTLE_EMPTY, SoundCategory.BLOCKS, 1.0F, 1.0F);
+				worldIn.playSound((PlayerEntity) null, pos, SoundEvents.BOTTLE_EMPTY, SoundCategory.BLOCKS, 1.0F, 1.0F);
 				Funktions.dropp(state, worldIn, pos, player, handIn, hit, ItemInit.SIEVE.get(), true, LEVEL, 3);
 			} else if (i == 3 && item == Items.GLASS_BOTTLE) {
-				worldIn.playSound(player, pos, SoundEvents.BOTTLE_FILL, SoundCategory.BLOCKS, 1.0F, 1.0F);
+				worldIn.playSound((PlayerEntity) null, pos, SoundEvents.BOTTLE_FILL, SoundCategory.BLOCKS, 1.0F, 1.0F);
 				Funktions.dropp(state, worldIn, pos, player, handIn, hit, ItemInit.WHEY.get(), true, LEVEL, 0);
 			}
 		}

@@ -18,6 +18,8 @@ import net.minecraft.state.StateContainer;
 import net.minecraft.state.properties.BlockStateProperties;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Hand;
+import net.minecraft.util.SoundCategory;
+import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.util.math.MathHelper;
@@ -58,14 +60,20 @@ public class Kefir extends Block {
 		int i = state.getValue(LEVEL);
 		ItemStack itemstack = player.getItemInHand(handIn);
 		Item item = itemstack.getItem();
-		if (!worldIn.isClientSide) {
+		if (itemstack.isEmpty()) {
+			return ActionResultType.PASS;
+		} else if (!worldIn.isClientSide) {
 			if (i == 0 && item == ItemInit.WHEY.get()) {
+				worldIn.playSound((PlayerEntity) null, pos, SoundEvents.BOTTLE_EMPTY, SoundCategory.BLOCKS, 1.0F, 1.0F);
 				Funktions.dropp(state, worldIn, pos, player, handIn, hit, Items.GLASS_BOTTLE, true, LEVEL, i += 1);
 			} else if (i == 1 && item == ItemInit.KEFIR_CRYSTAL.get()) {
+				worldIn.playSound((PlayerEntity) null, pos, SoundEvents.BOAT_PADDLE_WATER, SoundCategory.BLOCKS, 1.0F,
+						1.0F);
 				Funktions.dropp(state, worldIn, pos, player, handIn, hit, item, false, LEVEL, 3);
 			} else if (i == 2 && item == ItemInit.RAISINS.get()) {
 				Funktions.dropp(state, worldIn, pos, player, handIn, hit, item, false, LEVEL, 3);
 			} else if (i == 3) {
+				worldIn.playSound((PlayerEntity) null, pos, SoundEvents.VINE_STEP, SoundCategory.BLOCKS, 1.0F, 1.0F);
 				if (item == ItemInit.PLUM.get()) {
 					Funktions.dropp(state, worldIn, pos, player, handIn, hit, item, false, LEVEL, 4);
 					Timer timer = new Timer();
@@ -139,27 +147,33 @@ public class Kefir extends Block {
 				}
 			} else if (item == ItemInit.KEFIR_TUMBLER.get()) {
 				if (i == 5) {
-					itemstack.shrink(1);
+					worldIn.playSound((PlayerEntity) null, pos, SoundEvents.BOTTLE_FILL, SoundCategory.BLOCKS, 1.0F,
+							1.0F);
 					Funktions.dropp(state, worldIn, pos, player, handIn, hit, ItemInit.KEFIR_PLUM.get(), true, LEVEL,
 							0);
 				} else if (i == 7) {
-					itemstack.shrink(1);
+					worldIn.playSound((PlayerEntity) null, pos, SoundEvents.BOTTLE_FILL, SoundCategory.BLOCKS, 1.0F,
+							1.0F);
 					Funktions.dropp(state, worldIn, pos, player, handIn, hit, ItemInit.KEFIR_APRICOT.get(), true, LEVEL,
 							0);
 				} else if (i == 9) {
-					itemstack.shrink(1);
+					worldIn.playSound((PlayerEntity) null, pos, SoundEvents.BOTTLE_FILL, SoundCategory.BLOCKS, 1.0F,
+							1.0F);
 					Funktions.dropp(state, worldIn, pos, player, handIn, hit, ItemInit.KEFIR_LEMON.get(), true, LEVEL,
 							0);
 				} else if (i == 11) {
-					itemstack.shrink(1);
+					worldIn.playSound((PlayerEntity) null, pos, SoundEvents.BOTTLE_FILL, SoundCategory.BLOCKS, 1.0F,
+							1.0F);
 					Funktions.dropp(state, worldIn, pos, player, handIn, hit, ItemInit.KEFIR_CHERRY.get(), true, LEVEL,
 							0);
 				} else if (i == 13) {
-					itemstack.shrink(1);
+					worldIn.playSound((PlayerEntity) null, pos, SoundEvents.BOTTLE_FILL, SoundCategory.BLOCKS, 1.0F,
+							1.0F);
 					Funktions.dropp(state, worldIn, pos, player, handIn, hit, ItemInit.KEFIR_APPLE.get(), true, LEVEL,
 							0);
 				} else if (i == 15) {
-					itemstack.shrink(1);
+					worldIn.playSound((PlayerEntity) null, pos, SoundEvents.BOTTLE_FILL, SoundCategory.BLOCKS, 1.0F,
+							1.0F);
 					Funktions.dropp(state, worldIn, pos, player, handIn, hit, ItemInit.KEFIR_SWEETBERRY.get(), true,
 							LEVEL, 0);
 				}

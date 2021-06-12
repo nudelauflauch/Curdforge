@@ -5,14 +5,14 @@ import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import nudelauflauch.curd_mod.Curd_mod;
+import nudelauflauch.curd_mod.common.entities.tileentitys.TickEntity;
 
 public class TileEntityTypesInit {
 
 	public static final DeferredRegister<TileEntityType<?>> TILE_ENTITY_TYPE = DeferredRegister
 			.create(ForgeRegistries.TILE_ENTITIES, Curd_mod.MOD_ID);
-/*
-	public static final RegistryObject<TileEntityType<JamMakerTileEntity>> JAM_MAKER_ENTITY_TYPE = TILE_ENTITY_TYPE
-			.register("jam_maker", () -> TileEntityType.Builder
-					.create(JamMakerTileEntity::new, BlockInit.JAM_MAKER.get()).build(null));
-*/
+
+	public static final RegistryObject<TileEntityType<TickEntity>> TICK_ENTITY = TILE_ENTITY_TYPE.register(
+			"tickentity", () -> TileEntityType.Builder.of(TickEntity::new, BlockInit.KEFIR_JAR.get()).build(null));
+
 }

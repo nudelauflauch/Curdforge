@@ -19,6 +19,8 @@ import net.minecraft.state.properties.BlockStateProperties;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Direction;
 import net.minecraft.util.Hand;
+import net.minecraft.util.SoundCategory;
+import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.util.math.shapes.IBooleanFunction;
@@ -84,7 +86,10 @@ public class Kefir_crystallizer extends Block {
 		int i = state.getValue(LEVEL);
 		ItemStack itemstack = player.getItemInHand(handIn);
 		Item item = itemstack.getItem();
-		if (!worldIn.isClientSide) {
+		if (itemstack.isEmpty()) {
+			return ActionResultType.PASS;
+		} else if (!worldIn.isClientSide) {
+			worldIn.playSound((PlayerEntity) null, pos, SoundEvents.SAND_STEP, SoundCategory.BLOCKS, 1.0F, 1.0F);
 			if (i == 0 && item == ItemInit.TIBICOS.get()) {
 				Funktions.dropp(state, worldIn, pos, player, handIn, hit, item, false, LEVEL, 1);
 			} else if (i == 1 && item == Items.SUGAR) {

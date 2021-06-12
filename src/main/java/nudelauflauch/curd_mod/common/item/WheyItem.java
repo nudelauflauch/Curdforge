@@ -21,7 +21,8 @@ public class WheyItem extends Item {
 		super(properties);
 	}
 
-	public ItemStack onItemUseFinish(ItemStack stack, World worldIn, LivingEntity entityLiving) {
+	@Override
+	public ItemStack finishUsingItem(ItemStack stack, World worldIn, LivingEntity entityLiving) {
 		super.finishUsingItem(stack, worldIn, entityLiving);
 		if (entityLiving instanceof ServerPlayerEntity) {
 			ServerPlayerEntity serverplayerentity = (ServerPlayerEntity) entityLiving;
@@ -37,7 +38,6 @@ public class WheyItem extends Item {
 					playerentity.drop(itemstack, false);
 				}
 			}
-
 			return stack;
 		}
 	}
