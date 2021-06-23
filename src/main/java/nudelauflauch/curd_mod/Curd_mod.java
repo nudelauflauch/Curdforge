@@ -57,7 +57,6 @@ public class Curd_mod {
 
 		registerEntityModels(event.getMinecraftSupplier());
 		
-		
 	}
 	
 	

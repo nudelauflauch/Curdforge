@@ -58,7 +58,7 @@ public class BlockInit {
 			AbstractBlock.Properties.of(Material.GLASS).strength(1f, 2f).sound(SoundType.GLASS)));
 
 	public static final RegistryObject<CuddlyCactus> OPUNTIEN_CACTUS = BLOCKS.register("opuntien_cactus",
-			() -> new CuddlyCactus(AbstractBlock.Properties.of(Material.CACTUS).sound(SoundType.SWEET_BERRY_BUSH)
-					.air().instabreak()));
+			() -> new CuddlyCactus(AbstractBlock.Properties.of(Material.PLANT).sound(SoundType.SWEET_BERRY_BUSH)
+					.air().instabreak().randomTicks()));
 
 }

@@ -47,11 +47,11 @@ public class CuddlyCactus extends DeadBushBlock implements IGrowable {
 	}
 
 	@Override
-	public ActionResultType use(BlockState state, World worldIn, BlockPos pos, PlayerEntity player,
-			Hand handIn, BlockRayTraceResult hit) {
+	public ActionResultType use(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn,
+			BlockRayTraceResult hit) {
 		int i = state.getValue(AGE);
 		boolean flag = i == 3;
-		System.out.println(i);
+		System.out.println(player.walkDist);
 		if (!flag && player.getItemInHand(handIn).getItem() == Items.BONE_MEAL) {
 			return ActionResultType.PASS;
 		} else if (i > 4 && i == 8) {
@@ -77,7 +77,8 @@ public class CuddlyCactus extends DeadBushBlock implements IGrowable {
 	@Override
 	public void randomTick(BlockState state, ServerWorld worldIn, BlockPos pos, Random random) {
 		int i = state.getValue(AGE);
-		if (i < 8 && worldIn.getRawBrightness(pos.above(), 0) >= 9 && net.minecraftforge.common.ForgeHooks.onCropsGrowPre(worldIn, pos, state,random.nextInt(5) == 0)) {
+		if (i < 8 && worldIn.getRawBrightness(pos.above(), 0) >= 9
+				&& net.minecraftforge.common.ForgeHooks.onCropsGrowPre(worldIn, pos, state, random.nextInt(5) == 0)) {
 			worldIn.setBlock(pos, state.setValue(AGE, Integer.valueOf(i + 1)), 2);
 			net.minecraftforge.common.ForgeHooks.onCropsGrowPost(worldIn, pos, state);
 		}
@@ -88,9 +89,6 @@ public class CuddlyCactus extends DeadBushBlock implements IGrowable {
 		builder.add(AGE);
 	}
 
-	/**
-	 * Whether this IGrowable can grow
-	 */
 	public boolean isValidBonemealTarget(IBlockReader worldIn, BlockPos pos, BlockState state, boolean isClient) {
 		return state.getValue(AGE) < 8;
 	}
@@ -105,8 +103,7 @@ public class CuddlyCactus extends DeadBushBlock implements IGrowable {
 	}
 
 	@Override
-	protected boolean mayPlaceOn(BlockState state, IBlockReader worldIn, BlockPos pos) {
-		Block block = state.getBlock();
-		return block == Blocks.SAND || block == Blocks.RED_SAND;
+	protected boolean mayPlaceOn(BlockState p_200014_1_, IBlockReader p_200014_2_, BlockPos p_200014_3_) {
+		return p_200014_1_.is(Blocks.SAND);
 	}
 }

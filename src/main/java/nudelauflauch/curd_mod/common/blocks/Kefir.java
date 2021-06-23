@@ -16,6 +16,7 @@ import net.minecraft.state.DirectionProperty;
 import net.minecraft.state.IntegerProperty;
 import net.minecraft.state.StateContainer;
 import net.minecraft.state.properties.BlockStateProperties;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Hand;
 import net.minecraft.util.SoundCategory;
@@ -31,8 +32,10 @@ import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import nudelauflauch.curd_mod.common.entities.tileentitys.TickEntity;
 import nudelauflauch.curd_mod.common.te.CurdModBlockStateProperties;
 import nudelauflauch.curd_mod.core.init.ItemInit;
+import nudelauflauch.curd_mod.core.init.TileEntityTypesInit;
 
 public class Kefir extends Block {
 	public static final IntegerProperty LEVEL = CurdModBlockStateProperties.LEVEL_0_15;
@@ -187,6 +190,20 @@ public class Kefir extends Block {
 		builder.add(FACING);
 	}
 
+	@Override
+	public boolean hasTileEntity(BlockState state) {
+		return true;
+	}
+
+	@Override
+	public TileEntity createTileEntity(BlockState state, IBlockReader world) {
+		return TileEntityTypesInit.TICK_ENTITY.get().create();
+	}
+	
+	public TileEntity newBlockEntity(IBlockReader p_196283_1_) {
+	      return new TickEntity();
+	   }
+	
 	@OnlyIn(Dist.CLIENT)
 	public void animateTick(BlockState stateIn, World worldIn, BlockPos pos, Random rand) {
 		int i = stateIn.getValue(LEVEL);
