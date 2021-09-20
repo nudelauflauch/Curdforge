@@ -116,7 +116,7 @@
 		//Ruestung
 		"item.curd_mod.lost_ccp_helmet":"Lost Curd Cheese Pocket Helmet",
 		"item.curd_mod.lost_ccp_chestplate":"Lost Curd Cheese Pocket Chestplate",
-		"item.curd_mod.lost_ccp_leggins":"Lost Curd Cheese Pocket Leggins",
+		"item.curd_mod.lost_ccp_leggings":"Lost Curd Cheese Pocket Leggings",
 		"item.curd_mod.lost_ccp_boots":"Lost Curd Cheese Pocket Boots",
 		
 		//kefir
@@ -131,7 +131,7 @@
 		"item.curd_mod.kefir_tumbler":"Kefir Tumbler",
 	
 	
-	//other Things
+	//item group
 	"itemGroup.curd_food_tab":"Curd Mod Tab",
 	"itemGroup.curd_materials_tab":"Curd Materials Tab"
 }

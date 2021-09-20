@@ -8,6 +8,9 @@
 		},
 		"level=2": {
 			"model": "curd_mod:block/kefir_crystallizer_2"
+		},
+		"level=3": {
+			"model": "curd_mod:block/kefir_crystallizer_2"
 		}
 	}
 }

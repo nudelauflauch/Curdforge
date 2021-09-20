@@ -1,8 +1,6 @@
 package nudelauflauch.curd_mod.common.blocks;
 
 import java.util.Random;
-import java.util.Timer;
-import java.util.TimerTask;
 import java.util.stream.Stream;
 
 import net.minecraft.block.Block;
@@ -32,7 +30,6 @@ import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import nudelauflauch.curd_mod.common.entities.tileentitys.TickEntity;
 import nudelauflauch.curd_mod.common.te.CurdModBlockStateProperties;
 import nudelauflauch.curd_mod.core.init.ItemInit;
 import nudelauflauch.curd_mod.core.init.TileEntityTypesInit;
@@ -78,75 +75,18 @@ public class Kefir extends Block {
 			} else if (i == 3) {
 				worldIn.playSound((PlayerEntity) null, pos, SoundEvents.VINE_STEP, SoundCategory.BLOCKS, 1.0F, 1.0F);
 				if (item == ItemInit.PLUM.get()) {
-					Funktions.dropp(state, worldIn, pos, player, handIn, hit, item, false, LEVEL, 4);
-					Timer timer = new Timer();
-					timer.schedule(new TimerTask() {
-						@Override
-						public void run() {
-							worldIn.setBlockAndUpdate(pos,
-									state.setValue(LEVEL, Integer.valueOf(MathHelper.clamp(5, 0, 13))));
-						}
-					}, 10000);
+					worldIn.setBlockAndUpdate(pos, state.setValue(LEVEL, Integer.valueOf(MathHelper.clamp(4, 0, 13))));
 				} else if (item == ItemInit.APRICOT.get()) {
-					Funktions.dropp(state, worldIn, pos, player, handIn, hit, item, false, LEVEL, 6);
-					Timer timer = new Timer();
-					timer.schedule(new TimerTask() {
-						@Override
-						public void run() {
-							worldIn.setBlockAndUpdate(pos,
-									state.setValue(LEVEL, Integer.valueOf(MathHelper.clamp(7, 0, 13))));
-						}
-					}, 10000);
+					worldIn.setBlockAndUpdate(pos, state.setValue(LEVEL, Integer.valueOf(MathHelper.clamp(6, 0, 13))));
 				} else if (item == ItemInit.LEMON.get()) {
-					Funktions.dropp(state, worldIn, pos, player, handIn, hit, item, false, LEVEL, 8);
-					Timer timer = new Timer();
-					timer.schedule(new TimerTask() {
-						@Override
-						public void run() {
-							worldIn.setBlockAndUpdate(pos,
-									state.setValue(LEVEL, Integer.valueOf(MathHelper.clamp(9, 0, 13))));
-						}
-					}, 10000);
+					worldIn.setBlockAndUpdate(pos, state.setValue(LEVEL, Integer.valueOf(MathHelper.clamp(8, 0, 13))));
 				} else if (item == ItemInit.CHERRY.get()) {
-					Funktions.dropp(state, worldIn, pos, player, handIn, hit, item, false, LEVEL, 10);
-					Timer timer = new Timer();
-					timer.schedule(new TimerTask() {
-						@Override
-						public void run() {
-							worldIn.setBlockAndUpdate(pos,
-									state.setValue(LEVEL, Integer.valueOf(MathHelper.clamp(11, 0, 13))));
-						}
-					}, 10000);
+					worldIn.setBlockAndUpdate(pos, state.setValue(LEVEL, Integer.valueOf(MathHelper.clamp(10, 0, 13))));
 				} else if (item == Items.APPLE) {
 					Funktions.dropp(state, worldIn, pos, player, handIn, hit, item, false, LEVEL, 12);
-					Timer timer = new Timer();
-					timer.schedule(new TimerTask() {
-						@Override
-						public void run() {
-							worldIn.setBlockAndUpdate(pos,
-									state.setValue(LEVEL, Integer.valueOf(MathHelper.clamp(13, 0, 13))));
-						}
-					}, 10000);
+					worldIn.setBlockAndUpdate(pos, state.setValue(LEVEL, Integer.valueOf(MathHelper.clamp(12, 0, 13))));
 				} else if (item == Items.SWEET_BERRIES) {
-					Funktions.dropp(state, worldIn, pos, player, handIn, hit, item, false, LEVEL, 14);
-					Timer timer = new Timer();
-					timer.schedule(new TimerTask() {
-						@Override
-						public void run() {
-							worldIn.setBlockAndUpdate(pos,
-									state.setValue(LEVEL, Integer.valueOf(MathHelper.clamp(15, 0, 15))));
-						}
-					}, 10000);
-				} else if (item == Items.APPLE) {
-					Funktions.dropp(state, worldIn, pos, player, handIn, hit, item, false, LEVEL, 12);
-					Timer timer = new Timer();
-					timer.schedule(new TimerTask() {
-						@Override
-						public void run() {
-							worldIn.setBlockAndUpdate(pos,
-									state.setValue(LEVEL, Integer.valueOf(MathHelper.clamp(13, 0, 13))));
-						}
-					}, 10000);
+					worldIn.setBlockAndUpdate(pos, state.setValue(LEVEL, Integer.valueOf(MathHelper.clamp(14, 0, 13))));
 				}
 			} else if (item == ItemInit.KEFIR_TUMBLER.get()) {
 				if (i == 5) {
@@ -197,13 +137,9 @@ public class Kefir extends Block {
 
 	@Override
 	public TileEntity createTileEntity(BlockState state, IBlockReader world) {
-		return TileEntityTypesInit.TICK_ENTITY.get().create();
+		return TileEntityTypesInit.KEFIR_JAR_TICK_ENTITY.get().create();
 	}
-	
-	public TileEntity newBlockEntity(IBlockReader p_196283_1_) {
-	      return new TickEntity();
-	   }
-	
+
 	@OnlyIn(Dist.CLIENT)
 	public void animateTick(BlockState stateIn, World worldIn, BlockPos pos, Random rand) {
 		int i = stateIn.getValue(LEVEL);
@@ -214,5 +150,4 @@ public class Kefir extends Block {
 			worldIn.addParticle(ParticleTypes.SMOKE, d0, d1, d2, 0.0D, 0.0D, 0.0D);
 		}
 	}
-
 }

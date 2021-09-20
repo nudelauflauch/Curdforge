@@ -71,7 +71,7 @@ public class ItemInit {
 			() -> new ArmorItem(ModArmorMaterial.LOST_CCP, EquipmentSlotType.CHEST,
 					new Item.Properties().tab(Curd_mod.CURD_MOD_MATERIALS_GROUP)));
 
-	public static final RegistryObject<Item> LOST_CCP_LEGGINS = ITEMS.register("lost_ccp_leggins",
+	public static final RegistryObject<Item> LOST_CCP_LEGGINGS = ITEMS.register("lost_ccp_leggings",
 			() -> new ArmorItem(ModArmorMaterial.LOST_CCP, EquipmentSlotType.LEGS,
 					new Item.Properties().tab(Curd_mod.CURD_MOD_MATERIALS_GROUP)));
 

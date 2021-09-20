@@ -1,8 +1,6 @@
 package nudelauflauch.curd_mod.common.blocks;
 
 import java.util.Random;
-import java.util.Timer;
-import java.util.TimerTask;
 import java.util.stream.Stream;
 
 import net.minecraft.block.Block;
@@ -16,6 +14,7 @@ import net.minecraft.state.DirectionProperty;
 import net.minecraft.state.IntegerProperty;
 import net.minecraft.state.StateContainer;
 import net.minecraft.state.properties.BlockStateProperties;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Direction;
 import net.minecraft.util.Hand;
@@ -23,6 +22,7 @@ import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.shapes.IBooleanFunction;
 import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
@@ -31,10 +31,11 @@ import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 import nudelauflauch.curd_mod.common.te.CurdModBlockStateProperties;
 import nudelauflauch.curd_mod.core.init.ItemInit;
+import nudelauflauch.curd_mod.core.init.TileEntityTypesInit;
 
 public class Kefir_crystallizer extends Block {
 
-	public static final IntegerProperty LEVEL = CurdModBlockStateProperties.LEVEL_0_2;
+	public static final IntegerProperty LEVEL = CurdModBlockStateProperties.LEVEL_0_3;
 
 	public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
 
@@ -86,24 +87,17 @@ public class Kefir_crystallizer extends Block {
 		int i = state.getValue(LEVEL);
 		ItemStack itemstack = player.getItemInHand(handIn);
 		Item item = itemstack.getItem();
-		if (itemstack.isEmpty()) {
-			return ActionResultType.PASS;
-		} else if (!worldIn.isClientSide) {
-			worldIn.playSound((PlayerEntity) null, pos, SoundEvents.SAND_STEP, SoundCategory.BLOCKS, 1.0F, 1.0F);
+		if (!worldIn.isClientSide) {
+
 			if (i == 0 && item == ItemInit.TIBICOS.get()) {
+				worldIn.playSound((PlayerEntity) null, pos, SoundEvents.SAND_PLACE, SoundCategory.BLOCKS, 1.0F, 1.0F);
 				Funktions.dropp(state, worldIn, pos, player, handIn, hit, item, false, LEVEL, 1);
 			} else if (i == 1 && item == Items.SUGAR) {
+				worldIn.playSound((PlayerEntity) null, pos, SoundEvents.SAND_PLACE, SoundCategory.BLOCKS, 1.0F, 1.0F);
 				Funktions.dropp(state, worldIn, pos, player, handIn, hit, item, false, LEVEL, 2);
-				Timer timer = new Timer();
-				timer.schedule(new TimerTask() {
-					@Override
-					public void run() {
-						if (i == 1) {
-							Funktions.dropp(state, worldIn, pos, player, handIn, hit, ItemInit.KEFIR_CRYSTAL.get(),
-									true, LEVEL, 0);
-						}
-					}
-				}, 10000);
+			} else if (i == 3) {
+				popResource(worldIn, pos, new ItemStack(ItemInit.KEFIR_CRYSTAL.get(), 1));
+				worldIn.setBlockAndUpdate(pos, state.setValue(LEVEL, Integer.valueOf(MathHelper.clamp(0, 0, 3))));
 			}
 		}
 		return ActionResultType.SUCCESS;
@@ -112,6 +106,16 @@ public class Kefir_crystallizer extends Block {
 	protected void createBlockStateDefinition(StateContainer.Builder<Block, BlockState> builder) {
 		builder.add(LEVEL);
 		builder.add(FACING);
+	}
+
+	@Override
+	public boolean hasTileEntity(BlockState state) {
+		return true;
+	}
+
+	@Override
+	public TileEntity createTileEntity(BlockState state, IBlockReader world) {
+		return TileEntityTypesInit.KEFIR_CRYSTALLIZER_TICK_ENTITY.get().create();
 	}
 
 	@Override
